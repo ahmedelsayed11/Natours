@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const compression = require('compression');
 
 const path = require('path');
 const rateLimit = require('express-rate-limit');
@@ -53,6 +54,9 @@ app.use(
     whitelist: ['duration']
   })
 );
+
+// this middleware for compress app response
+app.use(compression());
 
 const limiter = rateLimit({
   max: 100,
@@ -112,7 +116,7 @@ app.all('*', (req, res, next) => {
 app.use(errorController);
 
 const server = app.listen(process.env.PORT, () => {
-  console.log(`Server is Running on port ${process.env.PORT}`);
+  // console.log(`Server is Running on port ${process.env.PORT}`);
 });
 
 // process.on('unhandledRejection', err => {

@@ -35,7 +35,6 @@ exports.uploadTourImages = uploader.fields([
 ]);
 
 exports.resizeTourImages = async (req, res, next) => {
-  console.log(req.files);
 
   // 1) Validate on image cover and images
   if (!req.files.imageCover || !req.files.images) return next();
